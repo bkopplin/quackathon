@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundMesh : MonoBehaviour
+public class ResetGround : MonoBehaviour
 {
-    Mesh mesh;
-    Vector3 triangles;
+    Vector3 startPos = new Vector3(0, 0, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -13,8 +12,11 @@ public class GroundMesh : MonoBehaviour
     }
 
     // Update is called once per frame
-    void UpdateMesh()
+    void Update()
     {
-        mesh.Clear();
+        if (transform.position.z <= -30)
+        {
+            transform.position = startPos;
+        }
     }
 }
