@@ -15,11 +15,13 @@ public class PlayerController : MonoBehaviour
     bool isOnGround = true;
 
     Rigidbody rigidbody;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -30,8 +32,13 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
-            rigidbody.AddForce(Vector3.up *  speedVertical);
+            rigidbody.AddForce(Vector3.up *  speedVertical, ForceMode.Impulse);
             isOnGround = false;
+        }
+
+        if (transform.position.y < -20)
+        {
+            gameManager.GameOver();
         }
     }
 
