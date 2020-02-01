@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# ignore temp directory
+Quackathon2020/Temp/*
+
