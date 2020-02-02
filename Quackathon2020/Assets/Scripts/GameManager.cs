@@ -8,10 +8,12 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI DistanceText;
     public GameObject titleScreen;
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
     private float score;
+    private float distance;
     public bool isGameActive;
     [SerializeField] GameObject [] assets;
     public float horizontalBound = 3.0f;
@@ -48,6 +50,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator DistanceUpdate()
+    {
+        while (isGameActive)
+        {
+            yield return new WaitForSeconds(1);
+            UpdateDistance(1);
+        }
+    }
 
     Vector3 RandomStartPos()
     {
@@ -60,6 +70,12 @@ public class GameManager : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    public void UpdateDistance(int distanceToAdd)
+    {
+        distance += distanceToAdd;
+        DistanceText.text = "Distance: " + distance + " km";
     }
 
     public void GameOver()
@@ -78,8 +94,11 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         score = 0;
+        distance = 0;
         UpdateScore(0);
+        UpdateDistance(0);
         StartCoroutine(SpawnObjects());
+        StartCoroutine(DistanceUpdate());
 
         titleScreen.SetActive(false);
     }
