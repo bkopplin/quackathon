@@ -53,4 +53,32 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pick Up"))
+        {
+            other.gameObject.SetActive(false);
+            gameManager.UpdateScore(1);
+        }
+
+        if (other.gameObject.CompareTag("Speed Up"))
+        {
+            other.gameObject.SetActive(false);
+            StartCoroutine(SpeedUp());
+        }
+
+        if (other.gameObject.CompareTag("Duck"))
+        {
+            other.gameObject.SetActive(false);
+            gameManager.UpdateScore(-1);
+        }
+    }
+
+    private IEnumerator SpeedUp()
+    {
+        Time.timeScale = .5f;
+        yield return new WaitForSeconds(3);
+        Time.timeScale = 1.0f;
+    }
 }

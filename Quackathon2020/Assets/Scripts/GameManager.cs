@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     float spawnRateMax = 2;
     float weightEnemy = 40;
     float weightPowerup = 10;
+    float weightPoint = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -39,9 +40,10 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(spawnRateMin, spawnRateMax));
             int index = (int)RandomRange.Range(
                 new FloatRange(0f, 1f, weightEnemy),
-                new FloatRange(2f, 4f, weightPowerup)
+                new FloatRange(1f, 2f, weightPowerup),
+                new FloatRange(2f, 3f, weightPoint)
                 );
-            Instantiate(assets[index], RandomStartPos(), Quaternion.identity);
+            Instantiate(assets[index], RandomStartPos(), assets[index].transform.rotation);
             Debug.Log("Spawn enemy");
         }
     }

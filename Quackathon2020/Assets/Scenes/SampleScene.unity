@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -161,9 +161,9 @@ MonoBehaviour:
   restartButton: {fileID: 567078147}
   isGameActive: 0
   assets:
-  - {fileID: 6343138630726312728, guid: a31a24fa53064e84799e4f41ad7ee9fd, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1179135388570652302, guid: 4dfe2e40dfc2314479c3a92c56fee30e, type: 3}
+  - {fileID: 1179135388570652302, guid: abc43c678603d3449b62380dda7a9c0d, type: 3}
+  - {fileID: 2411992540000720263, guid: 8c3bdd94e4fa8b34da0f553dac5e8789, type: 3}
   horizontalBound: 3
 --- !u!1001 &117316906
 PrefabInstance:
@@ -844,47 +844,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ec2c4f5b8458a4aa8fa24500a8ec41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curvedSurfaceMat: {fileID: 2100000, guid: b6495762d6436da43b26c6d1f5d6aa0c, type: 2}
 --- !u!1 &567078145
 GameObject:
   m_ObjectHideFlags: 0
