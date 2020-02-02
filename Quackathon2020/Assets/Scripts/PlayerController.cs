@@ -6,8 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     float verticalInput = 0;
     float horizontalInput = 0;
-    float speedVertical = 400;
-    float speedHorizontal = 5;
+    float jumpForce = 5;
+    [SerializeField]
+    float speedHorizontal = 15;
 
     float boundLeft = -20;
     float boundRight = 20;
@@ -27,18 +28,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * speedHorizontal * Time.deltaTime);
-        
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (gameManager.isGameActive)
         {
-            rigidbody.AddForce(Vector3.up *  speedVertical, ForceMode.Impulse);
-            isOnGround = false;
-        }
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * horizontalInput * speedHorizontal * Time.deltaTime);
 
-        if (transform.position.y < -20)
-        {
-            gameManager.GameOver();
+            if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+            {
+                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                isOnGround = false;
+            }
+
+            if (transform.position.y < -20)
+            {
+                gameManager.GameOver();
+            }
         }
     }
 
@@ -48,5 +52,33 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pick Up"))
+        {
+            other.gameObject.SetActive(false);
+            gameManager.UpdateScore(1);
+        }
+
+        if (other.gameObject.CompareTag("Speed Up"))
+        {
+            other.gameObject.SetActive(false);
+            StartCoroutine(SpeedUp());
+        }
+
+        if (other.gameObject.CompareTag("Duck"))
+        {
+            other.gameObject.SetActive(false);
+            gameManager.UpdateScore(-1);
+        }
+    }
+
+    private IEnumerator SpeedUp()
+    {
+        Time.timeScale = .5f;
+        yield return new WaitForSeconds(3);
+        Time.timeScale = 1.0f;
     }
 }

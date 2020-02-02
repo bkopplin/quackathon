@@ -8,11 +8,20 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI DistanceText;
     public GameObject titleScreen;
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
     private float score;
+    private float distance;
     public bool isGameActive;
+    [SerializeField] GameObject [] assets;
+    public float horizontalBound = 3.0f;
+    float spawnRateMin = 1;
+    float spawnRateMax = 2;
+    float weightEnemy = 40;
+    float weightPowerup = 10;
+    float weightPoint = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +35,47 @@ public class GameManager : MonoBehaviour
 
     }
 
+    IEnumerator SpawnObjects()
+    {
+        while (isGameActive)
+        {
+            yield return new WaitForSeconds(Random.Range(spawnRateMin, spawnRateMax));
+            int index = (int)RandomRange.Range(
+                new FloatRange(0f, 1f, weightEnemy),
+                new FloatRange(1f, 2f, weightPowerup),
+                new FloatRange(2f, 3f, weightPoint)
+                );
+            Instantiate(assets[index], RandomStartPos(), assets[index].transform.rotation);
+            Debug.Log("Spawn enemy");
+        }
+    }
+
+    IEnumerator DistanceUpdate()
+    {
+        while (isGameActive)
+        {
+            yield return new WaitForSeconds(1);
+            UpdateDistance(1);
+        }
+    }
+
+    Vector3 RandomStartPos()
+    {
+        float randomX = Random.Range(-horizontalBound, horizontalBound);
+        Debug.Log(randomX);
+        return new Vector3(randomX, 1, 30);
+    }
+
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    public void UpdateDistance(int distanceToAdd)
+    {
+        distance += distanceToAdd;
+        DistanceText.text = "Distance: " + distance + " km";
     }
 
     public void GameOver()
@@ -48,8 +94,11 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         score = 0;
+        distance = 0;
         UpdateScore(0);
-
+        UpdateDistance(0);
+        StartCoroutine(SpawnObjects());
+        StartCoroutine(DistanceUpdate());
 
         titleScreen.SetActive(false);
     }
